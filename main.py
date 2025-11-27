@@ -1,5 +1,9 @@
 import tkinter as tk
 from tkinter import Menu, messagebox, ttk
+from pages.items import items_page
+from database.db import create_tables
+create_tables()
+
 
 # --- Functions for menu commands ---
 def dummy_action(name):
@@ -37,9 +41,9 @@ def show_new_bill():
         widget.destroy()
     tk.Label(content_frame, text="New Bill Entry Page", font=("Segoe UI", 16), fg="#1e2d3d").pack(pady=80)
 
+
 def show_manage_items():
-    for widget in content_frame.winfo_children():
-        widget.destroy()
+    items_page(content_frame)
     tk.Label(content_frame, text="Manage Items (Add/Del/Edit)", font=("Segoe UI", 16), fg="#1e2d3d").pack(pady=80)
 
 def show_manage_customers():
@@ -77,7 +81,7 @@ menubar.add_cascade(label="Dashboard", menu=deshboard_menu)
 master_menu = Menu(menubar, tearoff=0)
 
 # Direct command
-master_menu.add_command(label="Items", command=lambda: dummy_action("Items"))
+master_menu.add_command(label="Items", command=lambda: show_manage_items())
 
 # Item Category submenu
 item_category_submenu = Menu(master_menu, tearoff=0)
